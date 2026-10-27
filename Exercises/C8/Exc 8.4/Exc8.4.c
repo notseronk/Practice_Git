@@ -5,50 +5,53 @@ int main()
 {
 int colour;
 
+printf("select a colour\n");
+scanf("%d", &colour);
+
 switch (colour)
 {
 case 0:
-    printf("black");
+    printf("\nblack");
     break;
 
 case 1:
-    printf("brown");
+    printf("\nbrown");
     break;
 
 case 2:
-    printf("red");
+    printf("\nred");
     break; 
 
 case 3:
-    printf("orange");
+    printf("\norange");
     break;
 
 case 4:
-    printf("yellow");
+    printf("\nyellow");
     break;
 
 case 5:
-    printf("green");
+    printf("\ngreen");
     break;
 
 case 6:
-    printf("blue");
+    printf("\nblue");
     break;
 
 case 7:
-    printf("violet");
+    printf("\nviolet");
     break;
 
 case 8:
-    printf("grey");
+    printf("\ngrey");
     break;
 
 case 9:
-    printf("white");
+    printf("\nwhite");
     break;
 
     default:
-    printf("invalid!");
+    printf("\ninvalid!");
     
 }
 
