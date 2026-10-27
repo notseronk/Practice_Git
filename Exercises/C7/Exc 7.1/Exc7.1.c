@@ -3,7 +3,8 @@
 
 int main(void)
 {
-    int a;		    // Declare some variables
+    int a;	
+    int r;	    // Declare some variables
     float f;
 
     // Use printf to prompt the use to enter an integer
@@ -14,6 +15,15 @@ int main(void)
     
     // And display on the screen
     printf ("The value you entered for a is %d\n", a);
+
+        // Use printf to prompt the use to enter an integer
+    printf ("Please enter another integer\n");
+    
+    // use scanf with %d to read into 'a' 
+    scanf ("%d",&r);	// note the important & 
+    
+    // And display on the screen
+    printf ("The value you entered for a is %d\n", r);
     
 	// Use printf to prompt the use to enter an float
     printf ("Please enter a float\n");
