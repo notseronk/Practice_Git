@@ -10,20 +10,24 @@ float NISTmilliVoltsToDegCKtype(float tcEMFmV);  // returns temp in degC assumin
 
 int main()
 {
-    int Vref;// Define VRef
+    int V_ref = 5;// Define VRef
 
     float T_0 = 25;
     float R_0 = 25E-3; // Define Thermistor constants
     float B = 3975-273;
     
-    int A0;
-    int A1;
+    char ThermistorPin[2]; //defining thermocouple and thermistor pins
+    char ThermocouplePin[2];
 
-    printf("input your thermistor pin")
-    scanf("%d", A0 );
+    printf("input your thermistor pin\n");
+    scanf("%s",&ThermistorPin);
+    printf("your slelected thermistor pin is %s", ThermistorPin); //input values for thermistor pins
+
+    printf("\n\ninput your thermocouple pin\n");
+    scanf("%d",&ThermocouplePin);
+    printf("your slelected thermistor pin is %s", ThermocouplePin); //input values for thermocouple pins 
 
     
-
     // Calculate thermistor temperature in degrees C ( Part b, i,ii,iii & v)
 
     // Calculate thermocouple temperature in degrees C ( Part c, i - iv)
@@ -35,8 +39,15 @@ int main()
     return 0;
 }
 
-/* Write a function here to convert ADC value to voltages. (Part a, equation 1)
-Call it from the main() function above */
+float adcToVolt(int Vref, char ThermistorPin) {
+    
+    int n_adc = 256; //analogRead(ThermistorPin); (defines our thermistor input)
+    
+    float V_adc = (n_adc*Vref)/1024;
+    
+    return V_adc;
+
+}
 
 /* Write a function to convert degrees K to degrees C  (Part b, (iv))
 Call it from the main() function above */
