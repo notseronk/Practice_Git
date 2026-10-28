@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 // Forward TC function
@@ -9,11 +10,19 @@ float NISTmilliVoltsToDegCKtype(float tcEMFmV);  // returns temp in degC assumin
 
 int main()
 {
-    // Define VRef
+    int Vref;// Define VRef
 
-    // Define Thermistor constants
+    float T_0 = 25;
+    float R_0 = 25E-3; // Define Thermistor constants
+    float B = 3975-273;
+    
+    int A0;
+    int A1;
 
-    // User input for pins A0 and A1
+    printf("input your thermistor pin")
+    scanf("%d", A0 );
+
+    
 
     // Calculate thermistor temperature in degrees C ( Part b, i,ii,iii & v)
 
