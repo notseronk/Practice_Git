@@ -9,7 +9,7 @@ float NISTdegCtoMilliVoltsKtype(float tempDegC);  // returns EMF in millivolts
 float NISTmilliVoltsToDegCKtype(float tcEMFmV);  // returns temp in degC assuming 0 degC cold jcn
 
 //adc to voltage converter
-float adcToVolt(int Vref, char Pin);
+float adcToVolt(int Vref, int Pin);
 
 //kelvin to celsius converter
 float KtoC (float K);
@@ -23,20 +23,20 @@ int main()
     float R_0 = 25.0; // Define Thermistor constants
     float B = 3975.0;
     
-    char ThermistorPin[3]; //defining thermocouple and thermistor pins
-    char ThermocouplePin[3];
+    int ThermistorPin; //defining thermocouple and thermistor pins
+    int ThermocouplePin;
 
-    printf("input your thermistor pin\n");
-    scanf("%s",ThermistorPin);
-    printf("your slelected thermistor pin is %s", ThermistorPin); //input values for thermistor pins
+    printf("input your Analog thermistor pin\n");
+    scanf("%d",&ThermistorPin);
+    printf("your slelected thermistor pin is %d", ThermistorPin); //input values for thermistor pins
 
     printf("\n\ninput your thermocouple pin\n");
-    scanf("%d",ThermocouplePin);
-    printf("your slelected thermistor pin is %s", ThermocouplePin); //input values for thermocouple pins 
+    scanf("%d",&ThermocouplePin);
+    printf("your slelected thermistor pin is %d", ThermocouplePin); //input values for thermocouple pins 
 
     float V_adc = adcToVolt(V_ref,ThermistorPin);
 
-    float R = ((10.0*3.3)/V_adc)-10; //calculates resistance in K_ohms
+    float R = ((10.0*V_ref)/V_adc)-10; //calculates resistance in K_ohms
 
     float Thermistor_K=pow(((1.0/T_0)+((1.0/B)*log(R/R_0))),-1.0);
     
@@ -44,10 +44,16 @@ int main()
     
 
     // Calculate thermocouple temperature in degrees C ( Part c, i - iv)
-    float E_TC = adcToVolt(V_ref,ThermocouplePin);
+    float Thermocouple_V = adcToVolt(V_ref,ThermocouplePin);
+
+    float E_TC = (Thermocouple_V-0.35)/54.4;
+
     float E_TCmV = E_TC*pow(10,3);
-    float E_comp = NISTdegCtoMilliVoltsKtype(E_TCmV);
-    float Thermocouple_C =  NISTmilliVoltsToDegCKtype(E_comp + E_TCmV);
+    float E_compmV = NISTdegCtoMilliVoltsKtype(Thermistor_C);
+
+    float Thermocouple_C =  NISTmilliVoltsToDegCKtype(E_compmV + E_TCmV);
+    
+    printf("\nE_TCmV = %f\n", E_TC);
 
     // Output results
     printf("Thermistor temperature (deg C): %f \n", Thermistor_C);
@@ -56,9 +62,9 @@ int main()
     return 0;
 }
 
-float adcToVolt(int Vref, char Pin) {
+float adcToVolt(int Vref, int Pin) {
     
-    int n_adc = 256; //analogRead(Pin); (defines our thermistor input)
+    int n_adc = 255; //analogRead(Pin); (defines our thermistor input)
     
     float V = (n_adc*Vref)/1024.0;
     
