@@ -5,6 +5,9 @@
 // Define HOW the function is to be used, code comes later
 float CalculateSurfaceAreaOfCylinder ( float R, float L );
 
+// Define surface area function
+float CalculateSurfaceAreaOfCylinder ( float R, float L );
+
 // Function to calculate the volume of a cylinder
 float CalculateVolumneOfCylinder ( float R, float L )
 {
